@@ -1,73 +1,52 @@
 <!DOCTYPE html> 
 <html> 
   <head> 
-  <title>It's Coffee Time!</title> 
-  <meta name="viewport" content="width=device-width, initial-scale=1"> 
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-  <link rel="stylesheet" href="css/mobiscroll.css" />
-  <link rel="stylesheet" type="text/css" href="css/countdown.css">
-  <link rel="stylesheet" type="text/css" href="css/animate.css">
-  <link href='http://fonts.googleapis.com/css?family=Molle:400italic' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="css/main.css">
+    <title>It's Coffee Time!</title> 
 
-  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-  <script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
-  <SCRIPT TYPE="text/javascript" src="lib/mobiscroll.js"></SCRIPT>
-  <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
-  <script type="text/javascript" src="lib/ICanHaz.js"></script>
-  <script type="text/javascript" src="lib/countdown.js"></script>
-  <script TYPE="text/javascript" src="src/main.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+    <link rel="stylesheet" href="css/mobiscroll.css" />
+    <link rel="stylesheet" type="text/css" href="css/countdown.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link href='http://fonts.googleapis.com/css?family=Molle:400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/slider.css">
 
-  <script id="footer" type="text/html">
-    <div class="dot-footer" data-role="footer" data-id="foo1" data-position="fixed">
-      <a href="#home-page" class="direction-buttons" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-mini="true" data-inline="true" data-corners="true" data-shadow="false" data-theme="c" data-ajax="false" style="visibility:hidden;"></a>
-      <span class="dot dot1"></span>
-      <span class="dot dot2"></span>
-      <span class="dot dot3"></span>
-      <a href="#timer-page" class="direction-buttons" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-mini="true" data-inline="true" data-corners="true" data-shadow="false" data-theme="c" data-ajax="false" style="visibility:hidden;"></a>
-    </div><!-- /footer -->
-  </script>
+    <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <SCRIPT TYPE="text/javascript" src="lib/mobiscroll.js"></SCRIPT>
+    <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+    <script type="text/javascript" src="lib/countdown.js"></script>
+    <script type="text/javascript" src="lib/ICanHaz.js"></script>
+    <script type="text/javascript" src="lib/swipeview.js"></script>
+    <script type="text/javascript" src="lib/jgestures.js"></script>
+    <script TYPE="text/javascript" src="src/main.js"></script>
+
+    <!-- Pages -->
+    <script id="home" type="text/html">
+      <h1>Coffee Time!</h1>
+    </script>
+
+    <script id="weights" type="text/html">
+      <h1>Coffee</h1>
+      <div id="coffee-scroller" name="coffee-scroller"></div>
+      <h1>Water</h1>
+      <div id="water-scroller" name="water-scroller"></div>
+    </script>
+
+    <script id="timer" type="text/html">
+      <h1>Bloom</h1>
+      <div id="countdown" class="countdownHolder"></div>
+      <div id="start-timer-button" class="button">Start</div>
+    </script>
 
 </head> 
+
 <body>
-
-<div id="home-page" data-role="page">
-
-  <div class="content" data-role="content">
-    <h1>Pour Over Timer</h1>
-  </div>
-  
-</div>
-
-
-<div id="weights-page" data-role="page">
-
-  <div class="content" data-role="content">
-    <h1>Coffee</h1>
-    <div id="coffee-scroller" name="coffee-scroller"></div>
-    <h1>Water</h1>
-    <div id="water-scroller" name="water-scroller"></div>
-  </div><!-- /content -->
-
-</div><!-- /page -->
-
-
-<div id="timer-page" data-role="page">
-
-  <div class="content" data-role="content">
-    <h1>Bloom</h1>
-    <div id="countdown" class="countdownHolder"></div>
-    <div id="start-timer-button" data-role="button" data-inline="true">Start</div>
-  </div><!-- /content -->
-
-</div><!-- /page -->
-
-<script type="text/javascript">
-   ich.refresh();
-  $('#home-page, #weights-page, #timer-page').append(ich.footer());
-  $('#home-page .dot1').addClass('dot-active');
-  $('#weights-page .dot2').addClass('dot-active');
-  $('#timer-page .dot3').addClass('dot-active');
-</script>
+<div id="wrapper"></div>
+  <ul id="nav">
+    <li id="dot0" class="selected" onclick="gallery.goToPage(0)"></li>
+    <li id="dot1" onclick="gallery.goToPage(1)"></li>
+    <li id="dot2" onclick="gallery.goToPage(2)"></li>
+  </ul>
 </body>
 </html>
