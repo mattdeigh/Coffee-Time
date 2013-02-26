@@ -1,32 +1,46 @@
 body {
   text-shadow: 0 1px 0 #fff;
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-align: center;
+}
+.countdownHolder {
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 .button {
+  font-family: 'Open Sans', sans-serif;
+  background: #ddd;
   text-align: center;
-cursor: pointer;
-position: relative;
-margin: .5em 5px;
-padding: .6em 20px;
--moz-box-shadow: 0 1px 4px rgba(0,0,0,.3);
--webkit-box-shadow: 0 1px 4px rgba(0,0,0,.3);
-box-shadow: 0 1px 4px rgba(0,0,0,.3);
--moz-border-radius: 1em;
--webkit-border-radius: 1em;
-border-radius: 1em;
-
+  font-size: 1.25em;
+  cursor: pointer;
+  position: relative;
+  margin: .5em 5px;
+  padding: .6em 20px;
+  -moz-box-shadow: 0 1px 4px rgba(0,0,0,.3);
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.3);
+  box-shadow: 0 1px 4px rgba(0,0,0,.3);
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+  font-weight: 800;
 }
+.half-button {
+width: 75px;
+display: inline-block;
+}
+
 h1, h2 {
       font-family: 'Molle';
       font-weight: 400;
       font-style: italic;
       margin-bottom: 0;
+
     }
     #coffee-scroller, #water-scroller {
       margin: 0 auto;
       width: auto;
     }
     .dw {
-      font-family: sans-serif;
+      font-family: 'Open Sans Condensed', sans-serif;
     }
     .dw-inline {
       text-align: center;

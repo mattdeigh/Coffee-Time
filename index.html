@@ -19,24 +19,31 @@
     <script type="text/javascript" src="lib/ICanHaz.js"></script>
     <script type="text/javascript" src="lib/swipeview.js"></script>
     <script type="text/javascript" src="lib/jgestures.js"></script>
+    <script type="text/javascript" src="lib/path.js"></script>
     <script TYPE="text/javascript" src="src/main.js"></script>
 
     <!-- Pages -->
     <script id="home" type="text/html">
-      <h1>Coffee Time!</h1>
+      <div id="homePage">
+        <h1>Coffee Time!</h1>
+      </div>
     </script>
 
     <script id="weights" type="text/html">
-      <h1>Coffee</h1>
-      <div id="coffee-scroller" name="coffee-scroller"></div>
-      <h1>Water</h1>
-      <div id="water-scroller" name="water-scroller"></div>
+      <div id="weightsPage">
+        <h1>Coffee</h1>
+        <div id="coffee-scroller" name="coffee-scroller"></div>
+        <h1>Water</h1>
+        <div id="water-scroller" name="water-scroller"></div>
+      </div>
     </script>
 
     <script id="timer" type="text/html">
-      <h1>Bloom</h1>
-      <div id="countdown" class="countdownHolder"></div>
-      <div id="start-timer-button" class="button">Start</div>
+      <div id="timerPage">
+        <h1>Bloom</h1>
+        <div id="countdown" class="countdownHolder"></div>
+        <div id="start-timer-button" class="button">Start</div>
+      </div>
     </script>
 
 </head> 
@@ -44,9 +51,9 @@
 <body>
 <div id="wrapper"></div>
   <ul id="nav">
-    <li id="dot0" class="selected" onclick="gallery.goToPage(0)"></li>
-    <li id="dot1" onclick="gallery.goToPage(1)"></li>
-    <li id="dot2" onclick="gallery.goToPage(2)"></li>
+    <li id="dot0" class="selected" onclick="mainView.goToPage(0)"></li>
+    <li id="dot1" onclick="mainView.goToPage(1)"></li>
+    <li id="dot2" onclick="mainView.goToPage(2)"></li>
   </ul>
 </body>
 </html>

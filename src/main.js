@@ -5,16 +5,16 @@ $(document).ready(function(){
   /*
    * Set up the Slider pages
    */
-  var mainView;
-
   mainView = new SwipeView('#wrapper', { numberOfPages: 3, loop: false });
   $(mainView.masterPages[1]).append(ich.home());
   $(mainView.masterPages[2]).append(ich.weights());
   $(mainView.masterPages[0]).append(ich.timer());
 
+  hashName = [ 'home', 'weights', 'timer'];
   mainView.onFlip(function () {
     $('#nav .selected').removeClass('selected');
     $('#dot'+mainView.pageIndex).addClass('selected');
+    window.location.hash = hashName[mainView.pageIndex];
   });
 
   mainView.onMoveOut(function () {
@@ -29,108 +29,132 @@ $(document).ready(function(){
   /*
    * Set up the weights scrollers
    */
-   var waterToCoffee = 18.75
-   //Your code for each page load here
-   var gMassCoffee = {};
-   var gMassWater = {};
+  var waterToCoffee = 18.75
+  //Your code for each page load here
+  var gMassCoffee = {};
+  var gMassWater = {};
 
-   _.each(_.range(8,73,4), function (n) {
-     gMassCoffee[n] = n;
-     gMassWater[n*waterToCoffee] = n*waterToCoffee;
-   });
-   $("#coffee-scroller").mobiscroll({
-     onChange: function(text, inst) {
-       $("#water-scroller").mobiscroll('setValue', [parseInt(text)*waterToCoffee, 'g'], true);
-     },
-     wheels:[{
-       'mass': gMassCoffee,
-       'units':{
-         g:'g'
-       }
-     }], 
-     display: 'inline',
-     height: 25,
-     showLabel: false
-   });
-   $("#water-scroller").mobiscroll({
-     onChange: function(text, inst) {
-       $("#coffee-scroller").mobiscroll('setValue', [parseInt(text)/waterToCoffee, 'g'], true);
-     },
-     wheels:[{
-       'mass': gMassWater,
-       'units':{
-         g:'g'
-       }
-     }], 
-     display: 'inline',
-     height: 25,
-     showLabel: false
-   });
+  _.each(_.range(8,73,4), function (n) {
+   gMassCoffee[n] = n;
+   gMassWater[n*waterToCoffee] = n*waterToCoffee;
+  });
+  $("#coffee-scroller").mobiscroll({
+   onChange: function(text, inst) {
+     $("#water-scroller").mobiscroll('setValue', [parseInt(text)*waterToCoffee, 'g'], true);
+   },
+   wheels:[{
+     'mass': gMassCoffee,
+     'units':{
+       g:'g'
+     }
+   }], 
+   display: 'inline',
+   height: 25,
+   showLabel: false
+  });
+  $("#water-scroller").mobiscroll({
+   onChange: function(text, inst) {
+     $("#coffee-scroller").mobiscroll('setValue', [parseInt(text)/waterToCoffee, 'g'], true);
+   },
+   wheels:[{
+     'mass': gMassWater,
+     'units':{
+       g:'g'
+     }
+   }], 
+   display: 'inline',
+   height: 25,
+   showLabel: false
+  });
 
    /*
     * Set up the Countdown Timer
     */
-    var bloomCallback = function(days, hours, minutes, seconds){
-        if(minutes+seconds == 0) {
-          cd.setLeft(2*60);
-          cd.setCallback(infusionCallback);
-          var head = $("#timer-page h1");
-          head.addClass('animated fadeOut');
-          head.animationComplete(function(){ 
-            head.text("Infusion");
-            head.removeClass("fadeOut");
-            head.addClass('animated fadeIn');
+  var bloomCallback = function(days, hours, minutes, seconds){
+      if(minutes+seconds == 0) {
+        cd.setLeft(2*60);
+        cd.setCallback(infusionCallback);
+        var head = $("#timerPage h1");
+        head.addClass('animated fadeOut');
+        head.animationComplete(function(){ 
+          head.text("Infusion");
+          head.removeClass("fadeOut");
+          head.addClass('animated fadeIn');
+          head.animationComplete(function(){
+            head.removeClass("fadeIn");
+            head.addClass("animated flash");
             head.animationComplete(function(){
-              head.removeClass("fadeIn");
-              head.addClass("animated flash");
-              head.animationComplete(function(){
-                head.removeClass("animated flash");
-              });
-            }); 
-          });
-        }
-      };
-    var infusionCallback = function(days,hours,minutes,seconds){
-            if(minutes+seconds == 0) {
-              console.log('all done!');
-              cd.pause();
-            }
+              head.removeClass("animated flash");
+            });
+          }); 
+        });
+      }
+    };
+  var infusionCallback = function(days,hours,minutes,seconds){
+          if(minutes+seconds == 0) {
+            console.log('all done!');
+            cd.pause();
           }
-
-    var cd = $('#countdown').countdown({
-      left: 30,
-      callback: bloomCallback
-    });
-
-
-    var startButton = $("#start-timer-button");
-    startButton.bind('tapone',function(){
-      cd.start();
-      startButton.detach();
-
-      $("#timer-page .content").append(
-        '<div id="pause-timer-button">Pause</div>\
-        <div id="reset-timer-button">Reset</div>'
-      ).trigger('create');
-
-      $("#pause-timer-button").bind('tapone',function(){
-        if(cd._start){
-          cd.pause();
-          $("#pause-timer-button .ui-btn-text").text("Resume").trigger('create');
-        } else {
-          cd.resume();
-          $("#pause-timer-button .ui-btn-text").text("Pause").trigger('create');
         }
-      });
 
-      $("#reset-timer-button").bind('tapone',function(){
+  var cd = $('#countdown').countdown({
+    left: 30,
+    callback: bloomCallback
+  });
+
+
+  var startButton = $("#start-timer-button");
+  startButton.bind('tapone',function(){
+    cd.start();
+    startButton.detach();
+
+    $("#timerPage").append(
+      '<div id="pause-timer-button" class="button half-button">Pause</div>\
+      <div id="reset-timer-button" class="button half-button">Reset</div>'
+    );
+
+    $("#pause-timer-button").bind('tapone',function(){
+      if(cd._start){
         cd.pause();
-        cd.setLeft(30);
-        cd.setCallback(bloomCallback);
-        $("#timer-page h1").text("Bloom");
-        $("#pause-timer-button").remove();
-        $("#reset-timer-button").remove();
-        $("#timer-page .content").append(startButton);
-      });
+        $("#pause-timer-button").text("Resume");
+      } else {
+        cd.resume();
+        $("#pause-timer-button").text("Pause");
+      }
     });
+
+    $("#reset-timer-button").bind('tapone',function(){
+      cd.pause();
+      cd.setLeft(30);
+      cd.setCallback(bloomCallback);
+      $("#timerPage h1").text("Bloom");
+      $("#pause-timer-button").remove();
+      $("#reset-timer-button").remove();
+      $("#timerPage").append(startButton);
+    });
+  });
+       
+
+  /*
+   * Routing
+   */
+  var goHome = _.partial(mainView.goToPage, 0).bind(mainView);
+  var goWeights = _.partial(mainView.goToPage, 1).bind(mainView);
+  var goTimer = function() {
+    $(mainView.masterPages[0]).css('visibility', "");
+    mainView.goToPage(2);
+  };
+
+  Path.map("#home").to(goHome);
+
+  Path.map("#weights").to(goWeights);
+
+  Path.map("#timer").to(goTimer);
+
+  Path.root("#home");
+
+  Path.rescue(goHome);
+
+  Path.listen();
+    
 });
