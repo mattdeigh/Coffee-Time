@@ -76,14 +76,14 @@ $(document).ready(function(){
         cd.setCallback(infusionCallback);
         var head = $("#timerPage h1");
         head.addClass('animated fadeOut');
-        head.animationComplete(function(){ 
+        head.bind( 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(){ 
           head.text("Infusion");
           head.removeClass("fadeOut");
           head.addClass('animated fadeIn');
-          head.animationComplete(function(){
+          head.bind( 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(){
             head.removeClass("fadeIn");
             head.addClass("animated flash");
-            head.animationComplete(function(){
+            head.bind( 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(){
               head.removeClass("animated flash");
             });
           }); 
@@ -98,7 +98,7 @@ $(document).ready(function(){
         }
 
   var cd = $('#countdown').countdown({
-    left: 30,
+    left: 2,
     callback: bloomCallback
   });
 
@@ -156,5 +156,5 @@ $(document).ready(function(){
   Path.rescue(goHome);
 
   Path.listen();
-    
+
 });

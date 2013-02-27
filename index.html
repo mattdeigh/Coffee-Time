@@ -4,11 +4,11 @@
     <title>It's Coffee Time!</title> 
 
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
-    <link rel="stylesheet" href="css/mobiscroll.css" />
+    <link rel="stylesheet" type="text/css" href="css/mobiscroll.css" />
     <link rel="stylesheet" type="text/css" href="css/countdown.css">
     <link rel="stylesheet" type="text/css" href="css/animate.css">
-    <link href='http://fonts.googleapis.com/css?family=Molle:400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Molle:400italic|Open+Sans+Condensed:300|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/reveal.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/slider.css">
 
@@ -19,6 +19,7 @@
     <script type="text/javascript" src="lib/ICanHaz.js"></script>
     <script type="text/javascript" src="lib/swipeview.js"></script>
     <script type="text/javascript" src="lib/jgestures.js"></script>
+    <script type="text/javascript" src="lib/jquery.reveal.js"></script>
     <script type="text/javascript" src="lib/path.js"></script>
     <script TYPE="text/javascript" src="src/main.js"></script>
 
@@ -26,6 +27,7 @@
     <script id="home" type="text/html">
       <div id="homePage">
         <h1>Coffee Time!</h1>
+        <div id="menu"><a href="#" data-reveal-id="about-modal">About</a> | <a href="#" data-reveal-id="settings-modal">Settings</a></div>
       </div>
     </script>
 
@@ -49,11 +51,25 @@
 </head> 
 
 <body>
-<div id="wrapper"></div>
-  <ul id="nav">
-    <li id="dot0" class="selected" onclick="mainView.goToPage(0)"></li>
-    <li id="dot1" onclick="mainView.goToPage(1)"></li>
-    <li id="dot2" onclick="mainView.goToPage(2)"></li>
-  </ul>
+    <div id="wrapper"></div>
+
+    <!-- Menu popups -->
+    <div id="about-modal" class="reveal-modal">
+        <h1>About Coffee Time</h1>
+        <p>What time is it?</p>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+    <div id="settings-modal" class="reveal-modal">
+        <h1>Coffee Time Settings</h1>
+        <p>Settings go here</p>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+    
+    <ul id="nav">
+        <li id="dot0" class="selected" onclick="mainView.goToPage(0)"></li>
+        <li id="dot1" onclick="mainView.goToPage(1)"></li>
+        <li id="dot2" onclick="mainView.goToPage(2)"></li>
+    </ul>
+    
 </body>
 </html>
