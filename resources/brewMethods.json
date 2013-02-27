@@ -1,0 +1,19 @@
+{
+  "pour-over": {
+    "title": "Pour Over",
+    "default-ratio": 18.75,
+    "timer-steps": [
+      { "name": "Bloom", "time": 30 },
+      { "name": "Infusion", "time": 120 }
+    ]
+  },
+  "french-press": {
+    "title": "French Press",
+    "default-ratio": 18.3,
+    "timer-steps": [
+      { "name": "Bloom", "time": 60 },
+      { "name": "Stir!", "time": 5 },
+      { "name": "Infusion", "time": 240 }
+    ]    
+  }
+}

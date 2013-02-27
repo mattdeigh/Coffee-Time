@@ -1,3 +1,8 @@
+var tone;
+if($.sound.support) {
+  tone = $.sound.load('/resources/tone');
+}
+
 $(document).ready(function(){
   // Disable default pinch/etc.
   document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -72,6 +77,7 @@ $(document).ready(function(){
     */
   var bloomCallback = function(days, hours, minutes, seconds){
       if(minutes+seconds == 0) {
+        tone.play();
         cd.setLeft(2*60);
         cd.setCallback(infusionCallback);
         var head = $("#timerPage h1");
@@ -92,6 +98,7 @@ $(document).ready(function(){
     };
   var infusionCallback = function(days,hours,minutes,seconds){
           if(minutes+seconds == 0) {
+            tone.play();
             console.log('all done!');
             cd.pause();
           }
