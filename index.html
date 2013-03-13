@@ -29,6 +29,11 @@
       <div id="homePage">
         <h1>Coffee Time!</h1>
         <div id="menu"><a href="#" data-reveal-id="about-modal">About</a> | <a href="#" data-reveal-id="settings-modal">Settings</a></div>
+        <select name="brew-methods" id="brew-methods"  onchange="showValue(this.value)">
+          {{#methods}}
+            <option value='{{name}}'>{{name}}</option>
+          {{/methods}}
+        </select>
       </div>
     </script>
 
