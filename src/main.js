@@ -133,10 +133,43 @@ $(document).ready(function(){
               cd.pause();
             }
           }
-
+    var transitionTimerTitle = function(title) {
+      var head = $("#timerPage h1");
+      head.addClass('animated fadeOut');
+      head.bind( 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(){ 
+        head.text(title);
+        head.removeClass("fadeOut");
+        head.addClass('animated fadeIn');
+        head.bind( 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(){
+          head.removeClass("fadeIn");
+          head.addClass("animated flash");
+          head.bind( 'animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(){
+            head.removeClass("animated flash");
+          });
+        }); 
+      });
+    }
+    var stepCount = 1;
+    var nextStepCallback = function(days,hours,minutes,seconds){
+      if(minutes+seconds == 0) {
+        tone.play();
+        var title;
+        if(stepCount >= data[brewMethod]['timer-steps'].length) {
+          title = 'Done!';
+          time = 0;
+          cd.pause();
+        } else {
+          title = data[brewMethod]['timer-steps'][stepCount].name;
+          time = data[brewMethod]['timer-steps'][stepCount].time;
+          stepCount += 1;
+        }
+        cd.setLeft(time);
+        transitionTimerTitle(title);
+      }
+    }
     var cd = $('#countdown').countdown({
-      left: 2,
-      callback: bloomCallback
+      left: data[brewMethod]['timer-steps'][0].time,
+      callback: nextStepCallback
     });
 
 
@@ -162,20 +195,25 @@ $(document).ready(function(){
 
       $("#reset-timer-button").bind('tapone',function(){
         cd.pause();
-        cd.setLeft(30);
-        cd.setCallback(bloomCallback);
-        $("#timerPage h1").text("Bloom");
+        cd.setLeft(data[brewMethod]['timer-steps'][0].time);
+        $("#timerPage h1").text(data[brewMethod]['timer-steps'][0].name);
+        stepCount = 1;
         $("#pause-timer-button").remove();
         $("#reset-timer-button").remove();
         $("#timerPage").append(startButton);
       });
     });
     
-    window.showValue = function(val) {
+    window.changeMethod = function(val) {
       brewMethod = val;
       ratio = data[brewMethod]["default-ratio"];
-
       setScrollers(ratio);
+
+      stepCount = 1;
+      cd.setLeft(data[brewMethod]['timer-steps'][0].time);
+      transitionTimerTitle(data[brewMethod]['timer-steps'][0].name);
+      cd.pause();
+
     }
 
     /*
